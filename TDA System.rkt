@@ -29,3 +29,17 @@
                   (cons (append (caddr system) (list chatbot))
                         (cdr (cddr system)))))))
 
+; add-user
+define (user-exists? system user)
+  (ormap (lambda (existing-user) (string=? existing-user user))
+         (cadddr system))) 
+
+(define (system-add-user system user)
+  (if (user-exists? system user)
+      system  
+      (list (car system)  
+            (cadr system) 
+            (caddr system)  
+            (append (cadddr system) (list user)) 
+            ))) 
+
