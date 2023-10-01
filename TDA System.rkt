@@ -15,4 +15,17 @@
         '() 
         fechaFinal))
 
+; add-chatbot
+(define (chatbot-exists? system chatbot)
+  (ormap (lambda (existing-chatbot)
+           (= (car existing-chatbot) (car chatbot)))
+         (caddr system)))
+
+(define (system-add-chatbot system chatbot)
+  (if (chatbot-exists? system chatbot)
+      system
+      (cons (car system)
+            (cons (cadr system)
+                  (cons (append (caddr system) (list chatbot))
+                        (cdr (cddr system)))))))
 
