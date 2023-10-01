@@ -55,6 +55,16 @@
             (list-ref system 4)  ; chatHistory
             user)))  ; Establecer el usuario que ha iniciado sesión
 
+; logout
+(define (system-logout system)
+  (list (car system)     ; Nombre del sistema
+        (cadr system)    ; InitialChatbotCodeLink
+        (caddr system)   ; Lista de chatbots
+        (cadddr system)  ; Lista de usuarios
+        (list-ref system 4)  ; chatHistory
+        #f))  ; Resetear el campo de usuario que ha iniciado sesión a #f
+
+
 
 
 
