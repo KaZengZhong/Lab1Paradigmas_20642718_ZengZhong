@@ -1,6 +1,7 @@
 #lang racket
 
 (require racket/date)
+(provide (all-defined-out))
 
 ; constructor
 (define fecha (date->string (current-date)))

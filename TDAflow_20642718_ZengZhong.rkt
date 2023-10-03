@@ -1,18 +1,17 @@
-;TDA Flow
-
 #lang racket
 
-(require racket/date)
+(provide (all-defined-out))
 
 ; flow
 (define (flow id name-msg . options)
-  (if (unique-options? options)
-      (list id name-msg options)
-      (error "Los opciones de ID deben ser unicas")))
+  (list id name-msg (filter-duplicates options '())))
 
-(define (unique-options? options)
-  (equal? (length (option-ids options)) 
-          (length (remove-duplicates (option-ids options)))))
+(define (filter-duplicates options seen-ids)
+  (if (null? options)
+      '()
+      (if (member (car (car options)) seen-ids)  ; Se usa car para obtener el id de la opción
+          (filter-duplicates (cdr options) seen-ids)
+          (cons (car options) (filter-duplicates (cdr options) (cons (car (car options)) seen-ids))))))
 
 (define (option-ids options)
   (map car options))
