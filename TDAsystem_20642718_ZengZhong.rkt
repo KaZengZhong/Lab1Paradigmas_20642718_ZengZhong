@@ -83,6 +83,38 @@
         (list-ref system 4)  ; chatHistory
         #f))  ; Resetear el campo de usuario que ha iniciado sesión a #f
 
+; talk-rec
+(define (system-talk-rec system message)
+  ;; Comprobar si alguien ha iniciado sesión
+  (if (not (list-ref system 5))
+      (begin
+        (display "Necesitas iniciar sesión primero.\n")
+        system)
+      (if (find-response-in-flow (find-flow-by-id (find-chatbot-by-id system (cadr system)) (caddr (find-chatbot-by-id system (cadr system)))) message)
+          (begin
+            (display (string-append "Chatbot: " (find-response-in-flow (find-flow-by-id (find-chatbot-by-id system (cadr system)) (caddr (find-chatbot-by-id system (cadr system)))) message) "\n"))
+            system)
+          (begin
+            (display "Chatbot: No entiendo ese mensaje. Intenta de nuevo.\n")
+            system))))
+
+(define (find-chatbot-by-id system id)
+  (cond
+    ((null? (caddr system)) #f)
+    ((= id (caar (caddr system))) (car (caddr system)))
+    (else (find-chatbot-by-id (cdr (caddr system)) id))))
+
+(define (find-flow-by-id chatbot id)
+  (cond
+    ((null? (cadddr chatbot)) #f)
+    ((= id (caar (cadddr chatbot))) (car (cadddr chatbot)))
+    (else (find-flow-by-id (cdr (cadddr chatbot)) id))))
+
+(define (find-response-in-flow flow message)
+  (if (assoc message (caddr flow))  ; Buscar la opción por mensaje
+      (cadr (assoc message (caddr flow)))
+      #f))
+
 
 
 
