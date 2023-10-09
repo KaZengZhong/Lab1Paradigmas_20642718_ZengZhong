@@ -187,6 +187,26 @@
                     (format "Mensaje: ~a\nOpcion: ~a\n---\n" user-message system-response)))
                 chat-history))))
 
+;system-talk-norec
+(define (system-talk-norec system message)
+  ; Extraer los componentes necesarios del sistema
+  (let* ((user-code (first system))
+         (chatbot-code (second system))
+         (chatbots (third system))
+         (chatbot (find-chatbot-by-code chatbots chatbot-code))
+         (response-and-next-ids (get-response chatbot message))
+         (response (first response-and-next-ids))
+         (next-flow (second response-and-next-ids))
+         (next-chatbot-id (third response-and-next-ids)))
+
+    ; Actualizar el sistema con la respuesta
+    (list (first system)
+          next-chatbot-id
+          (replace-chatbot chatbots chatbot next-flow)
+          (fourth system)
+          (append (fifth system) (list (list message response)))
+          (sixth system))))
+
 
 
 
