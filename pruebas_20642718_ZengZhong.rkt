@@ -25,6 +25,8 @@
  (define s10 (system-login s9 "user2"))
 |#
 
+
+
 #| -------------------- Script de pruebas 2 --------------------
  
 ;----- Chatbot0 -----
@@ -80,6 +82,15 @@
 (define s15 (system-talk-rec s14 "1"))
 (define s16 (system-talk-rec s15 "3"))
 (define s17 (system-talk-rec s16 "5"))
+
+(display (system-synthesis s17 "user2"))
+
+(define s11 (system-talk-rec s10 "hola"))
+(define s12 (system-talk-rec s11 "1"))
+(define s13 (system-talk-rec s12 "4"))
+(define s14 (system-talk-rec s13 "1"))
+(define s15 (system-talk-rec s14 "1"))
+(define s16 (system-talk-rec s15 "3"))
 
 (display (system-synthesis s17 "user2"))
 (system-simulate s0 5 32131)
