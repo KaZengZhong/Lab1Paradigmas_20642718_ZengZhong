@@ -1,0 +1,1 @@
+Importante notar que en los script de prueba para que una funcion no tenga fallos se deben usar las funciones anteriores a ella.

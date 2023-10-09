@@ -1,0 +1,28 @@
+Requerimientos No Funcionales
+Autoevaluacion     1
+Lenguaje           1
+Version            1
+Standard           1
+No variables       1
+Documentacion      1
+Dom->Rec           1
+Organización       1
+Historial          1
+Script de Pruebas  1
+Prerrequisitos     1
+
+Requerimientos Funcionales
+Option			1
+Flow			1
+Flow-add-option		1
+Chatbot			1
+Chatbot-add-flow	1
+System			1
+System-add-chatbot	0.75
+System-add-user		1
+System-login		1
+System-logout		1
+System-talk-rec		0,5
+System-talk-norec	0,5
+System-synthesis	1
+System-simultate	0
